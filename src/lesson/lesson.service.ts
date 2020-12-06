@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Lesson } from './lesson.entity';
+import { CreateLessonInput } from './lesson.input';
 import { LessonRepository } from './lesson.repository';
 
 @Injectable()
@@ -16,12 +17,12 @@ export class LessonService {
     return lesson;
   }
 
-  async createLesson(
-    name: string,
-    startDate: string,
-    endDate: string,
-  ): Promise<Lesson> {
-    // const { name, startDate, endDate } = createLessonDto;
+  async getLessons(): Promise<Lesson[]> {
+    return await this.lessonRepository.find();
+  }
+
+  async createLesson(createLessonInput: CreateLessonInput): Promise<Lesson> {
+    const { name, startDate, endDate } = createLessonInput;
     const lesson = this.lessonRepository.create({
       name,
       startDate,
