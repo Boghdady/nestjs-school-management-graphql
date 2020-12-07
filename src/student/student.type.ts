@@ -1,7 +1,14 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-@ObjectType()
+@ObjectType('Student')
 export class StudentType {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  @Field((type) => ID)
+  _id: string;
+
   @Field()
-  name: string;
+  firstName: string;
+
+  @Field()
+  lastName: string;
 }
